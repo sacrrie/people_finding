@@ -9,22 +9,23 @@ cv2.imshow("original",ir)
 #create thresholds
 #thresh=cv2.adaptiveThreshold(ir,255,cv2.ADAPTIVE_THRESH_GAUSSIAN_C,cv2.THRESH_BINARY,9,3)
 back_up=ir.copy()
-(T,trh)=cv2.threshold(back_up,150,255,cv2.THRESH_BINARY)
+(T,trh)=cv2.threshold(back_up,120,255,cv2.THRESH_BINARY)
 cv2.imshow("single value thresh",trh)
 #otsu thresholding
 print("otsu method")
 T = mahotas.thresholding.otsu(ir)
 thresh=ir.copy()
-T=T+70
+T=T+20
 thresh[thresh>T]=255
 thresh[thresh<T]=0
 cv2.imshow("otsu thresh",thresh)
 
 T2 = mahotas.thresholding.rc(ir)
 thresh2=ir.copy()
-T2=T2+70
+T2=T2+40
 thresh2[thresh2>T2]=255
 thresh2[thresh2<T2]=0
+thresh2=cv2.resize(thresh2,(0,0),fx=4,fy=4)
 cv2.imshow("riddler-calvard thresh",thresh2)
 
 cv2.waitKey(0)

@@ -1,19 +1,12 @@
 from __future__ import print_function
 from imutils.object_detection import non_max_suppression
 from imutils import paths
+from pylepton import Lepton
 import numpy as np
 import imutils
 import cv2
+import mahotas
 
-#def HOG_detect(images):
-
-    #image = image[120:235,170:310]
-    #(a,b)=image.shape[1],image.shape[0]
-    #image = cv2.resize(image,(image.shape[1]*2,image.shape[0]*2))
-    #for (x,y,w,h) in rects:
-    #    cv2.rectangle(orig,(x,y),(x+w,y+h),(0,0,255),2)
-    #image = cv2.resize(image,(a,b))
-    #orig = cv2.resize(orig,(a,b))
 class HOG_detector:
     def __init__(self):
         self.hog=cv2.HOGDescriptor()
@@ -30,4 +23,16 @@ class HOG_detector:
             cv2.rectangle(image,(xA,yA),(xB,yB),(0,255,0),2)
         return image
 
+def capture(device = "/dev/spidev0.0"):
+    with Lepton(device) as l:
+        f,_ = l.capture()
+    cv2.normalize(f,f,0,65535,cv2.NORM_MINMAX)
+    np.right_shift(f,8,f)
+    return np.uint8(f)
+
+def threshold(image):
+    T=mahotas.thresholding.rc(image)+40
+    image[image>T]=255
+    image[image<T]=0
+    return image
 

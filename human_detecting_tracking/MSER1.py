@@ -10,7 +10,8 @@ ir=cv2.imread(sys.argv[1],cv2.IMREAD_GRAYSCALE)
 
 simple=ir.copy()
 threshold=ir.copy()
-mser=cv2.MSER_create(7,25,2000,0.45,30,200,1.01,0.003,5)
+#mser=cv2.MSER_create(7,1000,10000,0.45,30,200,1.01,0.003,5)
+mser=cv2.MSER_create()
 mser.setPass2Only(True)
 regions,_=mser.detectRegions(ir)
 #non max suppression?

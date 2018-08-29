@@ -12,11 +12,14 @@ def capture(device = "/dev/spidev0.0"):
 #cap = cv2.VideoCapture(0)
 camera=PiCamera()
 camera.resolution=(800,600)
+camera.framerate = 10
 fourcc = cv2.VideoWriter_fourcc(*'H264')
-ifrout = cv2.VideoWriter('ifr_out.avi',fourcc,20.0,(80,60),False)
+#changed for pre-recording on 28/Aug
+#ifrout = cv2.VideoWriter('ifr_out.avi',fourcc,20.0,(80,60),False)
+ifrout = cv2.VideoWriter('/home/pi/test_shots/aug28_1_ifr_out.avi',fourcc,10.0,(80,60),False)
 #rgbout = cv2.VideoWriter('rgb_out.avi',fourcc,20.0,(800,600),True)
 camera.start_preview()
-camera.start_recording('rgb_out.h264')
+camera.start_recording('/home/pi/test_shots/aug28_1_rgb_out.h264')
 
 while(True):
     ifrframe=capture()
