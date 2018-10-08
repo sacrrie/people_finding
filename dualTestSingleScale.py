@@ -34,7 +34,9 @@ for rawCap in camera.capture_continuous(rawCaps,format="bgr",use_video_port=True
         rects=pd.detectSingle(parcel)
         if len(rects)>0:
         #TODO Redraw the bounding box as it is
-            cv2.rectangle(rgb,(x,y),(x+w,y+h),(255,255,255),2,cv2.LINE_AA)
+            for i in rects:
+                cv2.rectangle(rgb,(x+i[0],y+i[1]),(x+i[0]+64,y+i[1]+128),(255,255,255),2,cv2.LINE_AA)
+            cv2.rectangle(rgb,(x,y),(x+w,y+h),(0,255,255),2,cv2.LINE_AA)
         #debug purpose
 
         #for (X,Y,W,H) in rects:
