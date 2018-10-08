@@ -1,3 +1,4 @@
+#version 0.0.1 alpha
 #TODO: optimizing IFR frame chooser,HOG detector(multiScale -> singleScale)
 import cv2
 from picamera import PiCamera
