@@ -29,17 +29,13 @@ for rawCap in camera.capture_continuous(rawCaps,format="bgr",use_video_port=True
         con = enlarge(con)
         x,y,w,h=con
         parcel=rgb[y:y+h,x:x+w]
-        #ratio=parcel.shape[0]/400.0
-        #parcel=imutils.resize(parcel,height=400)
-        rects=pd.detect(parcel)
-        #for rect in rects:
-        #    rect=rect*ratio
-        #    (X,Y,W,H)=rect
-        #    X=int(X);Y=int(Y);W=int(W);H=int(H);
-        #    X=X+x;Y=Y+y
-        #    cv2.rectangle(rgb,(X,Y),(X+W,Y+H),(255,255,255),2,cv2.LINE_AA)
+        #print("line 33")
+        #cv2.waitKey(500)
+        rects=pd.detectSingle(parcel)
         if len(rects)>0:
+        #TODO Redraw the bounding box as it is
             cv2.rectangle(rgb,(x,y),(x+w,y+h),(255,255,255),2,cv2.LINE_AA)
+        #debug purpose
 
         #for (X,Y,W,H) in rects:
         #    X=X+x;Y=Y+y

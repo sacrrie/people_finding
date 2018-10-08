@@ -16,10 +16,10 @@ hog.setSVMDetector(cv2.HOGDescriptor_getDefaultPeopleDetector())
 image = cv2.imread(args["images"])
 #image = image[120:235,170:310]
 (a,b)=image.shape[1],image.shape[0]
-image = cv2.resize(image,(image.shape[1]*2,image.shape[0]*2))
+#image = cv2.resize(image,(image.shape[1]*2,image.shape[0]*2))
 orig = image.copy()
 
-(rects,weights) = hog.detectMultiScale(image,winStride=(3,3),padding=(4,4),scale=1.04)
+(rects,weights) = hog.detectMultiScale(image,winStride=(4,4),scale=1.04)
 #(rects,weights) = hog.detectMultiScale(image)
 for (x,y,w,h) in rects:
     cv2.rectangle(orig,(x,y),(x+w,y+h),(0,0,255),2)

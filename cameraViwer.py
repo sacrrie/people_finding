@@ -1,3 +1,4 @@
+#start the viewing of the pi camera, press q or crtl+c to exit
 from picamera import PiCamera
 import cv2
 
