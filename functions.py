@@ -75,7 +75,6 @@ def enlarge(box):
         w=800-x
     if (y+h)>600:
         h=600-y
-    #print(x,y,w,h)
     return [x,y,w,h]
 #Temp enhancement ends
 
