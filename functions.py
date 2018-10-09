@@ -58,6 +58,13 @@ def trans_coordinate(bounding_box):
     
     return [X,Y,W,H]
 
+def normalize(image):
+    #normalize all ROI to the width of 200
+    newWidth=200
+    ratio = newWidth/image.shape[1]
+    newHeight=int(image.shape[0]*ratio)
+    image=cv2.resize(image,(newWidth,newHeight))
+    return (image,ratio)
 #Temp enhance function
 def enlarge(box):
     x,y,w,h=box

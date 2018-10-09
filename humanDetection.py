@@ -1,5 +1,5 @@
-#version 0.0.1 alpha
-#TODO: optimizing IFR frame chooser,HOG detector(multiScale -> singleScale)
+#version 0.0.2 alpha
+#TODO: optimizing IFR frame chooser
 import cv2
 from picamera import PiCamera
 from picamera.array import PiRGBArray
@@ -30,22 +30,15 @@ for rawCap in camera.capture_continuous(rawCaps,format="bgr",use_video_port=True
         con = enlarge(con)
         x,y,w,h=con
         parcel=rgb[y:y+h,x:x+w]
-        #print("line 33")
-        #cv2.waitKey(500)
+        parcel,ratio=normalize(parcel)
         rects=pd.detectSingle(parcel)
         if len(rects)>0:
-        #TODO Redraw the bounding box as it is
             for i in rects:
+                i[0]= int(i[0]/ratio)
+                i[1]= int(i[1]/ratio)
                 cv2.rectangle(rgb,(x+i[0],y+i[1]),(x+i[0]+64,y+i[1]+128),(255,255,255),2,cv2.LINE_AA)
             cv2.rectangle(rgb,(x,y),(x+w,y+h),(0,255,255),2,cv2.LINE_AA)
-        #debug purpose
-
-        #for (X,Y,W,H) in rects:
-        #    X=X+x;Y=Y+y
-        #    cv2.rectangle(rgb,(X,Y),(X+W,Y+H),(255,255,255),2,cv2.LINE_AA)
-
-
-        #cv2.rectangle(rgb,(x,y),(x+w,y+h),(255,255,255),2,cv2.LINE_AA)
+    #debug
     #ifr = resize(ifr)
     #cv2.imshow("bounding boxes ir",ifr)
     cv2.imshow("result",rgb)
@@ -57,3 +50,5 @@ for rawCap in camera.capture_continuous(rawCaps,format="bgr",use_video_port=True
 out.release()
 cv2.destroyAllWindows()
 
+        #print("line 33")
+        #cv2.waitKey(500)
