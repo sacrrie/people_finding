@@ -15,7 +15,7 @@ int  main(int argc, char** argv){
 		cout <<"Usage: display_img Image"<< endl;
 		return -1;
 	}
-	String cascade_path="/usr/local/share/opencv4/haarcascades/haarcascade_frontalface.xml";
+	String cascade_path="/usr/local/share/opencv4/haarcascades/haarcascade_frontalface_default.xml";
 	face_cascade.load(cascade_path);
 	Mat image;
 	Mat image_gray;
@@ -30,7 +30,7 @@ int  main(int argc, char** argv){
 	face_cascade.detectMultiScale(image_gray, faces);
 	for (size_t i =0;i<faces.size();i++)
 	{
-		rectangle(image_gray,faces[i], Scalar(255,0,0),2);
+		rectangle(image,faces[i], Scalar(255,0,0),2);
 
 	}
 
